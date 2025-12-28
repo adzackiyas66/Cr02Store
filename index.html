@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CR02STORE | Tas & Kurma</title>
+  <style>
+    body {margin:0;font-family:Arial;background:#f5f7fa;}
+    header {background:#0d47a1;color:white;padding:20px;text-align:center;}
+    nav {background:#1565c0;padding:10px;text-align:center;}
+    nav a {color:white;margin:0 15px;text-decoration:none;font-weight:bold;}
+    .hero {padding:50px;text-align:center;background:#e3f2fd;}
+    .container {max-width:1100px;margin:auto;padding:30px;}
+    .products {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+    .card {background:white;padding:15px;border-radius:8px;box-shadow:0 3px 8px rgba(0,0,0,.1);}
+    .card img {width:100%;border-radius:8px;}
+    .btn {display:inline-block;background:#0d47a1;color:white;padding:10px 15px;margin-top:10px;border-radius:5px;text-decoration:none;cursor:pointer;}
+    footer {background:#0d47a1;color:white;text-align:center;padding:15px;margin-top:40px;}
+  </style>
+</head>
+<body>
+<header>
+  <h1>CR02STORE</h1>
+  <p>Toko Tas & Kurma</p>
+</header>
+
+<nav>
+  <a href="#">Beranda</a>
+  <a href="#produk">Produk</a>
+  <a href="#kontak">Kontak</a>
+</nav>
+
+<section class="hero">
+  <h2>Belanja Mudah & Aman</h2>
+  <p>Tas premium & kurma berkualitas</p>
+</section>
+
+<section id="produk" class="container">
+  <h2>Produk Kami</h2>
+  <div class="products">
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200">
+      <h3>Tas Premium</h3>
+      <p>Harga: Rp250.000</p>
+      <button class="btn" onclick="addToCart('Tas Premium',250000)">Tambah</button>
+    </div>
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200">
+      <h3>Kurma</h3>
+      <p>Harga: Rp50.000</p>
+      <button class="btn" onclick="addToCart('Kurma',50000)">Tambah</button>
+    </div>
+  </div>
+</section>
+
+<section class="container">
+  <h2>Keranjang</h2>
+  <div id="cart"></div>
+  <h3 id="total">Total: Rp 0</h3>
+  <a class="btn" href="https://wa.me/628xxxxxxxxxx">Checkout WhatsApp</a>
+</section>
+
+<footer>
+  <p>© 2025 CR02STORE</p>
+</footer>
+
+<script>
+let cart = [];
+function addToCart(name, price){
+  const item = cart.find(i => i.name === name);
+  if(item){ item.qty++; }
+  else{ cart.push({name, price, qty:1}); }
+  renderCart();
+}
+function renderCart(){
+  let html = '';
+  let total = 0;
+  cart.forEach(item=>{
+    total += item.price * item.qty;
+    html += `<p>${item.name} x ${item.qty} = Rp ${item.price * item.qty}</p>`;
+  });
+  document.getElementById('cart').innerHTML = html;
+  document.getElementById('total').innerText = 'Total: Rp ' + total;
+}
+</script>
+</body>
+</html>
